@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 import { Server } from "socket.io";
-import { save } from "../Controllers/logController.server";
+import { save } from "../Controllers/logController";
 import log from "../type/log";
 
 const router = Router()
