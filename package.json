@@ -20,8 +20,10 @@
   },
   "dependencies": {
     "@prisma/client": "^5.19.1",
+    "apexcharts": "^3.53.0",
     "express": "^4.19.2",
     "logs": "file:",
+    "preline": "^2.4.1",
     "socket.io": "^4.7.5",
     "tsc": "^2.0.4"
   },
