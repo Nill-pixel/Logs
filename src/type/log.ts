@@ -1,8 +1,15 @@
 import { LogLevel } from "@prisma/client"
 
-interface log {
+export interface log {
   level: LogLevel
   message: string
   details: string
 }
-export default log
+export interface LogsByDay {
+  [key: string]: number;
+}
+export interface LogStats {
+  totalLogs: number;
+  totalDays: number;
+  averageLogsPerDay: number;
+}

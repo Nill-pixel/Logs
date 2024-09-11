@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Server } from "socket.io";
-import { save, get, getINFO, getERROR, getWARNING, getCountByLevel, logsByMovie, frequentErrors, logsPerDay } from "../Controllers/logController";
-import log from "../type/log";
+import { save, get, count, getINFO, getERROR, getWARNING, countINFO, countERROR, countWARNING, getCountByLevel, logsByMovie, frequentErrors, logsPerDay, errorIncreasePercentage, logsIncreasePercentage } from "../Controllers/logController";
+import { log } from "../type/log";
 
 const router = Router()
 
@@ -11,6 +11,15 @@ export default (io: Server) => {
     try {
       const logs = await get()
       io.emit('get logs', logs)
+      res.status(200).json(logs)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get logs' })
+    }
+  })
+  router.get('/total', async (req, res) => {
+    try {
+      const logs = await count()
+      io.emit('count logs', logs)
       res.status(200).json(logs)
     } catch (error) {
       res.status(500).json({ error: 'Failed to get logs' })
@@ -44,6 +53,33 @@ export default (io: Server) => {
     }
   })
 
+  router.get('/info/count', async (req, res) => {
+    try {
+      const logs = await countINFO()
+      res.status(200).json(logs)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to count INFO logs' })
+    }
+  })
+
+  router.get('/error/count', async (req, res) => {
+    try {
+      const logs = await countERROR()
+      res.status(200).json(logs)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to count ERROR logs' })
+    }
+  })
+
+  router.get('/warning/count', async (req, res) => {
+    try {
+      const logs = await countWARNING()
+      res.status(200).json(logs)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to count WARNING logs' })
+    }
+  })
+
   router.get('/count-by-level', async (req, res) => {
     try {
       const logs = await getCountByLevel()
@@ -74,6 +110,24 @@ export default (io: Server) => {
   router.get('/logs-per-day', async (req, res) => {
     try {
       const logs = await logsPerDay()
+      res.status(200).json(logs)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get logs per day' })
+    }
+  })
+
+  router.get('/error-increase-percentage', async (req, res) => {
+    try {
+      const logs = await errorIncreasePercentage()
+      res.status(200).json(logs)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get logs per day' })
+    }
+  })
+
+  router.get('/logs-increase-percentage', async (req, res) => {
+    try {
+      const logs = await logsIncreasePercentage()
       res.status(200).json(logs)
     } catch (error) {
       res.status(500).json({ error: 'Failed to get logs per day' })

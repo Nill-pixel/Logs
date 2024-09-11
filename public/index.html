@@ -7,14 +7,25 @@
   <title>Socket.IO Client</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<style>
+  .alert {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .alert.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+</style>
 
 <body class="bg-white shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-  <h1 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-    WebSocket Client</h1>
-
-  <!-- Card Section -->
   <!-- Card Section -->
   <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="sm:w-1/2 xl:w-1/3 mx-auto text-center mb-6">
+      <h2 class="text-xl font-semibold md:text-2xl md:leading-tight text-gray-800 dark:text-neutral-200">WebSocket
+        Client</h2>
+    </div>
     <!-- Grid -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       <!-- Card -->
@@ -53,7 +64,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                72,540
+                <div id="total"></div>
               </h3>
               <span
                 class="inline-flex items-center gap-x-1 py-0.5 px-2 rounded-full bg-green-100 text-green-900 dark:bg-green-800 dark:text-green-100">
@@ -64,7 +75,7 @@
                   <polyline points="16 7 22 7 22 13" />
                 </svg>
                 <span class="inline-block text-xs font-medium">
-                  12.5%
+                  <div id="percentage_logs_div"></div>
                 </span>
               </span>
             </div>
@@ -93,7 +104,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-                29.4%
+                <div id="info_div"></div>
               </h3>
             </div>
           </div>
@@ -122,7 +133,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                56.8%
+                <div id="error_div"></div>
               </h3>
               <span
                 class="inline-flex items-center gap-x-1 py-0.5 px-2 rounded-full bg-red-100 text-red-900 dark:bg-red-800 dark:text-red-100">
@@ -133,7 +144,7 @@
                   <polyline points="16 17 22 17 22 11" />
                 </svg>
                 <span class="inline-block text-xs font-medium">
-                  1.7%
+                  <div id="percentage_error_div"></div>
                 </span>
               </span>
             </div>
@@ -178,93 +189,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-                92,913
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Card -->
-      <!-- Card -->
-      <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-        <div class="p-4 md:p-5 flex gap-x-4">
-          <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
-            <svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg"
-              fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
-            </svg>
-
-          </div>
-
-          <div class="grow">
-            <div class="flex items-center gap-x-2">
-              <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                COUNT BY LEVEL
-              </p>
-              <div class="hs-tooltip">
-                <div class="hs-tooltip-toggle">
-                  <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                    <path d="M12 17h.01" />
-                  </svg>
-                  <span
-                    class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
-                    role="tooltip">
-                    The average pageviews
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="mt-1 flex items-center gap-x-2">
-              <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-                92,913
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Card -->
-      <!-- Card -->
-      <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-        <div class="p-4 md:p-5 flex gap-x-4">
-          <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
-            <svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg"
-              fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
-            </svg>
-
-          </div>
-
-          <div class="grow">
-            <div class="flex items-center gap-x-2">
-              <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                LOGS BY MOVIES
-              </p>
-              <div class="hs-tooltip">
-                <div class="hs-tooltip-toggle">
-                  <svg class="shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                    <path d="M12 17h.01" />
-                  </svg>
-                  <span
-                    class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
-                    role="tooltip">
-                    The average pageviews
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="mt-1 flex items-center gap-x-2">
-              <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-                92,913
+                <div id="warning_div"></div>
               </h3>
             </div>
           </div>
@@ -308,7 +233,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-                92,913
+                <div id="frequent_error_div"></div>
               </h3>
             </div>
           </div>
@@ -351,7 +276,7 @@
             </div>
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-                92,913
+                <div id="logs_per_day_div"></div>
               </h3>
             </div>
           </div>
@@ -362,7 +287,11 @@
     <!-- End Grid -->
   </div>
 
-  <div id="logsContainer" class="p-4"></div>
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="space-y-5">
+    </div>
+  </div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
@@ -371,6 +300,7 @@
     });
     socket.on('save logs', (log) => {
       console.log('Novo log salvo:', log);
+      showAlert(log);
     });
 
     fetch('/logs/info')
@@ -386,22 +316,164 @@
       });
 
     function fetchLogs() {
+      fetch('/logs/total')
+        .then(response => response.json())
+        .then(data => {
+          const total_div = document.getElementById('total')
+          total_div.innerHTML = ''
+          total_div.innerHTML += data
+        })
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
+      fetch('/logs/info/count')
+        .then(response => response.json())
+        .then(data => {
+          const info_div = document.getElementById('info_div')
+          info_div.innerHTML = ''
+          info_div.innerHTML += data
+        })
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
+      fetch('/logs/error/count')
+        .then(response => response.json())
+        .then(data => {
+          const error_div = document.getElementById('error_div')
+          error_div.innerHTML = ''
+          error_div.innerHTML += data
+        })
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
+      fetch('/logs/warning/count')
+        .then(response => response.json())
+        .then(data => {
+          const warning_div = document.getElementById('warning_div')
+          warning_div.innerHTML = ''
+          warning_div.innerHTML += data
+        })
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
       fetch('/logs/logs-per-day')
         .then(response => response.json())
         .then(data => {
-          const logsContainer = document.getElementById('logsContainer');
-          logsContainer.innerHTML = ''; // Limpa a div
-          data.forEach(log => {
-            logsContainer.innerHTML += `<p>${log.data} - ${log._count._all}</p>`;
-          });
+          const warning_div = document.getElementById('logs_per_day_div')
+          warning_div.innerHTML = ''
+          warning_div.innerHTML += data.averageLogsPerDay
+        })
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
+      fetch('/logs/frequent-errors')
+        .then(response => response.json())
+        .then(data => {
+          const warning_div = document.getElementById('frequent_error_div')
+          warning_div.innerHTML = ''
+          warning_div.innerHTML += data
+        })
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
+      fetch('/logs/error-increase-percentage')
+        .then(response => response.json())
+        .then(data => {
+          const warning_div = document.getElementById('percentage_error_div')
+          warning_div.innerHTML = ''
+          warning_div.innerHTML += data + '%'
+        })
+
+        .catch(error => console.error('Erro ao buscar logs:', error));
+
+      fetch('/logs/logs-increase-percentage')
+        .then(response => response.json())
+        .then(data => {
+          const warning_div = document.getElementById('percentage_logs_div')
+          warning_div.innerHTML = ''
+          warning_div.innerHTML += data + '%'
         })
         .catch(error => console.error('Erro ao buscar logs:', error));
     }
 
-    // Atualizar os logs a cada 5 minutos
-    setInterval(fetchLogs, 5 * 60 * 1000);
 
-    // Inicializar com a primeira busca
+    function showAlert(log) {
+      const container = document.querySelector('.space-y-5');
+
+      // Remove alertas antigos
+      container.querySelectorAll('[role="alert"]').forEach(alert => alert.remove());
+
+      let alertDiv;
+      switch (log.level) {
+        case 'INFO':
+          alertDiv = document.createElement('div');
+          alertDiv.className = 'bg-teal-50 border-t-2 border-teal-500 rounded-lg p-4 dark:bg-teal-800/30';
+          alertDiv.innerHTML = `
+          <div class="flex">
+            <div class="shrink-0">
+              <span class="inline-flex justify-center items-center size-8 rounded-full border-4 border-teal-100 bg-teal-200 text-teal-800 dark:border-teal-900 dark:bg-teal-800 dark:text-teal-400">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </span>
+            </div>
+            <div class="ms-3">
+              <h3 class="text-gray-800 font-semibold dark:text-white">${log.message}</h3>
+              <p class="text-sm text-gray-700 dark:text-neutral-400">Informational log received.</p>
+            </div>
+          </div>
+        `;
+          break;
+        case 'ERROR':
+          alertDiv = document.createElement('div');
+          alertDiv.className = 'bg-red-50 border-s-4 border-red-500 p-4 dark:bg-red-800/30';
+          alertDiv.innerHTML = `
+          <div class="flex">
+            <div class="shrink-0">
+              <span class="inline-flex justify-center items-center size-8 rounded-full border-4 border-red-100 bg-red-200 text-red-800 dark:border-red-900 dark:bg-red-800 dark:text-red-400">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              </span>
+            </div>
+            <div class="ms-3">
+              <h3 class="text-gray-800 font-semibold dark:text-white">${log.message}</h3>
+              <p class="text-sm text-gray-700 dark:text-neutral-400">An error has occurred.</p>
+            </div>
+          </div>
+        `;
+          break;
+        case 'WARNING':
+          alertDiv = document.createElement('div');
+          alertDiv.className = 'bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4 dark:bg-yellow-800/10 dark:border-yellow-900 dark:text-yellow-500';
+          alertDiv.innerHTML = `
+          <div class="flex">
+            <div class="shrink-0">
+              <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+              </svg>
+            </div>
+            <div class="ms-4">
+              <h3 class="text-sm font-semibold">${log.message}</h3>
+              <div class="mt-1 text-sm text-yellow-700">Warning message received.</div>
+            </div>
+          </div>
+        `;
+          break;
+        default:
+          return; // Ignorar outros tipos de logs
+      }
+
+      container.appendChild(alertDiv);
+
+      setTimeout(() => {
+        alertDiv.classList.add('fade-out');
+        setTimeout(() => {
+          alertDiv.remove();
+        }, 500); // Tempo de transição
+      }, 5000); // Tempo de exibição
+    }
+
+    // Atualiza os logs a cada 5 segundos
+    setInterval(fetchLogs, 5 * 1000);
     fetchLogs();
 
   </script>
