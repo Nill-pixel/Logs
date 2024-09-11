@@ -1,17 +1,4 @@
-<p align="center">
-  <a href="" rel="noopener">
-    <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo">
-  </a>
-</p>
-
 <h3 align="center">Sistema de Logs</h3>
-
-<div align="center">
-  [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-  [![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-</div>
 
 ---
 
@@ -33,7 +20,10 @@
 
 O Sistema de Logs é uma solução robusta para a coleta, armazenamento e análise de logs provenientes de múltiplos serviços. Ele permite a configuração de diferentes níveis de severidade (info, warning, error) e facilita o monitoramento em tempo real dos eventos do sistema através de WebSockets. Além disso, o sistema pode enviar dados agregados e alertas para outros servidores utilizando Webhooks.
 
-O sistema centraliza os logs de diversos serviços, processa e armazena-os em um banco de dados, e expõe uma API para consulta. Ele também possui um componente que analisa logs em tempo real para identificar padrões e eventos críticos, gerando alertas e insights para visualização em um painel de controle.
+A arquitetura do projeto é dividida em dois repositórios principais:
+
+1. **[movie-application-master](https://github.com/Nill-pixel/movie-application-master.git)**: Contém a implementação dos serviços que geram e enviam logs para o serviço central.
+2. **[Logs](https://github.com/Nill-pixel/Logs.git)**: O repositório principal que coleta, armazena e analisa os logs, gerando insights e alertas em tempo real.
 
 ## 🏁 Getting Started <a name="getting_started"></a>
 
@@ -45,11 +35,11 @@ Certifique-se de ter o Node.js e o npm instalados. Você pode baixar o Node.js [
 
 ### Installing
 
-1. Clone o repositório:
+1. Clone o repositório de logs:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/Nill-pixel/Logs.git
+   cd Logs
    ```
 
 2. Instale as dependências:
@@ -66,6 +56,19 @@ Certifique-se de ter o Node.js e o npm instalados. Você pode baixar o Node.js [
    npm run dev
    ```
 
+### Configurando os Serviços de Envio de Logs
+
+Clone o repositório do projeto que envia logs:
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/Nill-pixel/movie-application-master.git
+   cd movie-application-master
+   ```
+
+2. Configure o endpoint de API para enviar logs para o serviço central de logs conforme a documentação no repositório `Logs`.
+
 ## 🔧 Running the tests <a name="tests"></a>
 
 Este projeto não inclui testes automatizados no momento. Certifique-se de testar manualmente as funcionalidades principais após a instalação.
@@ -74,9 +77,9 @@ Este projeto não inclui testes automatizados no momento. Certifique-se de testa
 
 Para usar o sistema de logs:
 
-1. Configure os serviços para enviar logs para o serviço central.
-2. Conecte-se ao WebSocket para receber atualizações em tempo real.
-3. Utilize a API para consultar logs e estatísticas.
+1. Configure os serviços (do repositório `movie-application-master`) para enviar logs para o serviço central (do repositório `Logs`).
+2. Conecte-se ao WebSocket do serviço central para receber atualizações em tempo real.
+3. Utilize a API do serviço central para consultar logs e estatísticas.
 4. Receba alertas e insights via WebSockets e Webhooks.
 
 ## 🚀 Deployment <a name="deployment"></a>
@@ -96,24 +99,13 @@ Para implantar o sistema em um ambiente de produção:
    npm start
    ```
 
-## ⛏️ Built Using <a name="built_using"></a>
+## ⛏️ Built Using <a name = "built_using"></a>
 
 - [Prisma](https://www.prisma.io/) - ORM para banco de dados
 - [Express](https://expressjs.com/) - Framework de servidor
 - [Socket.io](https://socket.io/) - Comunicação em tempo real via WebSockets
 - [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação
 
-## ✍️ Authors <a name="authors"></a>
+## ✍️ Authors <a name = "authors"></a>
 
-- [Seu Nome](https://github.com/seu-usuario) - Desenvolvimento e manutenção
-
-Veja também a lista de [contribuidores](https://github.com/seu-usuario/seu-repositorio/contributors) que participaram deste projeto.
-
-## 🎉 Acknowledgements <a name="acknowledgement"></a>
-
-- Agradecimento a todos que contribuíram com o código e ideias
-- Inspiração de projetos similares e referências úteis
-
----
-
-Sinta-se à vontade para ajustar qualquer parte conforme necessário para se adequar melhor às suas necessidades e ao seu projeto específico!
+- [Nilvany Sunguessungue](https://github.com/Nill-pixel) - Desenvolvimento e manutenção
