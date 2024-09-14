@@ -2,16 +2,17 @@ import express from "express";
 import router from "./Routes/log";
 import { Server } from "socket.io";
 import http from 'http'
-import bodyParser from 'body-parser'
 import path from "path";
+import { jsonParser, requestLogger, staticFiles } from "./Middleware/logMiddleware";
 
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
 const publicPath = path.resolve(__dirname, '..', 'public');
 
-app.use(bodyParser.json())
-app.use(express.static(publicPath))
+app.use(jsonParser)
+app.use(staticFiles)
+app.use(requestLogger)
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
@@ -27,7 +28,7 @@ io.on('connection', (socket) => {
   socket.on('client-event', (data) => {
     console.log('Received event from client:', data)
   })
-  
+
   socket.on('disconnect', () => {
     console.log('User disconnect')
   })
