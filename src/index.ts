@@ -4,6 +4,8 @@ import { Server } from "socket.io";
 import http from 'http'
 import path from "path";
 import { jsonParser, requestLogger, staticFiles } from "./Middleware/logMiddleware";
+import { HadoopConfig } from "./config/hadoopConfig";
+import hadoopRoutes from './Routes/hadoop';
 
 const app = express()
 const server = http.createServer(app)
@@ -19,6 +21,21 @@ app.get('/', (req, res) => {
 });
 
 app.use('/logs', router(io))
+
+app.use('/hadoop', hadoopRoutes());
+
+// Inicializa a conexão com Hadoop ao iniciar a aplicação
+HadoopConfig.testConnection()
+  .then(connected => {
+    if (connected) {
+      console.log('✅ Conexão com Hadoop estabelecida com sucesso');
+    } else {
+      console.log('❌ Falha ao conectar com Hadoop');
+    }
+  })
+  .catch(error => {
+    console.error('❌ Erro ao conectar com Hadoop:', error);
+  });
 
 io.on('connection', (socket) => {
   console.log('A user connected')

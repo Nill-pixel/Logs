@@ -25,7 +25,8 @@
     "logs": "file:",
     "preline": "^2.4.1",
     "socket.io": "^4.7.5",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "webhdfs": "^1.2.0"
   },
   "description": ""
 }

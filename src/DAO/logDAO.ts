@@ -1,8 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { log, LogsByDay, LogStats } from "../type/log";
+import { saveToHDFS } from "../Services/saveHDFS";
 
 const prisma = new PrismaClient()
 export const save = async (logs: log) => {
+  await saveToHDFS(logs).catch(error => {
+    console.error('Erro ao salvar logs:', error);
+  });
   return await prisma.log.create({
     data: {
       level: logs.level,
