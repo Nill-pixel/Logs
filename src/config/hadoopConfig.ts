@@ -9,7 +9,7 @@ export class HadoopConfig {
     if (!this.instance) {
       console.log('Criando cliente WebHDFS...');
       this.instance = WebHDFS.createClient({
-        user: process.env.HADOOP_USER || 'hdfs',
+        user: process.env.HADOOP_USER || 'Nill',
         host: process.env.HADOOP_HOST || 'localhost',
         port: parseInt(process.env.HADOOP_PORT || '9870'),
         path: '/webhdfs/v1'

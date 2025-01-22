@@ -10,7 +10,7 @@ import {
   countWARNING as countWARNINGDAO,
   getCountByLevel as getCountByLevelDAO,
   logsPerDay as logsPerDayDAO,
-  logsByMovie as logsByMovieDAO,
+  // logsByMovie as logsByMovieDAO,
   frequentErrors as frequentErrorsDAO,
   logsIncreasePercentage as logsIncreasePercentageDAO,
   errorIncreasePercentage as errorIncreasePercentageDAO
@@ -59,9 +59,9 @@ export const logsPerDay = async () => {
   return await logsPerDayDAO()
 }
 
-export const logsByMovie = async () => {
-  return await logsByMovieDAO()
-}
+// export const logsByMovie = async () => {
+//   return await logsByMovieDAO()
+// }
 
 export const frequentErrors = async () => {
   return await frequentErrorsDAO()

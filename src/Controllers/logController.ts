@@ -9,7 +9,7 @@ import {
   countERROR as countERRORService,
   countWARNING as countWARNINGService,
   getCountByLevel as getCountByLevelService,
-  logsByMovie as logsByMovieService,
+  // logsByMovie as logsByMovieService,
   logsPerDay as logsPerDayService,
   frequentErrors as frequentErrorsService,
   logsIncreasePercentage as logsIncreasePercentageService,
@@ -61,9 +61,9 @@ export const logsPerDay = async () => {
   return await logsPerDayService()
 }
 
-export const logsByMovie = async () => {
-  return await logsByMovieService()
-}
+// export const logsByMovie = async () => {
+//   return await logsByMovieService()
+// }
 
 export const frequentErrors = async () => {
   return await frequentErrorsService()

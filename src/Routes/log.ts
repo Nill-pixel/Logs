@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Server } from "socket.io";
-import { save, get, count, getINFO, getERROR, getWARNING, countINFO, countERROR, countWARNING, getCountByLevel, logsByMovie, frequentErrors, logsPerDay, errorIncreasePercentage, logsIncreasePercentage } from "../Controllers/logController";
+import { get, count, getINFO, getERROR, getWARNING, countINFO, countERROR, countWARNING, getCountByLevel, frequentErrors, logsPerDay, errorIncreasePercentage, logsIncreasePercentage, save } from "../Controllers/logController";
 import { log } from "../type/log";
 
 const router = Router()
@@ -89,14 +89,14 @@ export default (io: Server) => {
     }
   })
 
-  router.get('/movies', async (req, res) => {
-    try {
-      const logs = await logsByMovie()
-      res.status(200).json(logs)
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to get logs by movie' })
-    }
-  })
+  // router.get('/movies', async (req, res) => {
+  //   try {
+  //     const logs = await logsByMovie()
+  //     res.status(200).json(logs)
+  //   } catch (error) {
+  //     res.status(500).json({ error: 'Failed to get logs by movie' })
+  //   }
+  // })
 
   router.get('/frequent-errors', async (req, res) => {
     try {

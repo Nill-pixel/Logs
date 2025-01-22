@@ -22,7 +22,8 @@ enum LogLevel {
 model Log {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   level   LogLevel
-  message String?
+  logId   String   @unique
+  message String
   details Json
   data    DateTime @default(now())
 }

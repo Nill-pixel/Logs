@@ -3,9 +3,12 @@ import router from "./Routes/log";
 import { Server } from "socket.io";
 import http from 'http'
 import path from "path";
+import cron from 'node-cron'
 import { jsonParser, requestLogger, staticFiles } from "./Middleware/logMiddleware";
 import { HadoopConfig } from "./config/hadoopConfig";
 import hadoopRoutes from './Routes/hadoop';
+import { syncSystems } from "./core/logStorageManager";
+
 
 const app = express()
 const server = http.createServer(app)
@@ -21,6 +24,16 @@ app.get('/', (req, res) => {
 });
 
 app.use('/logs', router(io))
+// */5 * * * * *
+// 0 */6 * * *
+cron.schedule('*/5 * * * * *', async () => {
+  try {
+    await syncSystems();
+    console.log('Sincronização completada com sucesso');
+  } catch (error) {
+    console.error('Erro durante a sincronização:', error);
+  }
+});
 
 app.use('/hadoop', hadoopRoutes());
 

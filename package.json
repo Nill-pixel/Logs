@@ -20,9 +20,12 @@
   },
   "dependencies": {
     "@prisma/client": "^5.19.1",
+    "@types/node-cron": "^3.0.11",
     "apexcharts": "^3.53.0",
+    "crypto": "^1.0.1",
     "express": "^4.19.2",
     "logs": "file:",
+    "node-cron": "^3.0.3",
     "preline": "^2.4.1",
     "socket.io": "^4.7.5",
     "tsc": "^2.0.4",
